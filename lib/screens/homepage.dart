@@ -99,11 +99,6 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
               ),
-              // Stack(
-              //   children: [
-              //
-              //   ],
-              // ),
               Container(
                 padding: EdgeInsets.symmetric(vertical: 16.0),
                 height: 300,
@@ -170,23 +165,20 @@ class HomePage extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Expanded(
-                      // just repeated the above listview since no other end point provided
-                      child: BlocBuilder<ProductBloc, ProductState>(
-                        builder: (BuildContext context, state) {
-                          if(state is ProductsFetchedState){
-                            return Expanded(
-                              child: ListView.builder(
-                                  itemCount: state.products.length,
-                                  scrollDirection: Axis.horizontal,
-                                  itemBuilder: (context, index){
-                                    return ProductWidget(product: state.products[index]);
-                                  }),
-                            );
-                          }
-                          return Container();
-                        },
-                      ),
+                    BlocBuilder<ProductBloc, ProductState>(
+                      builder: (BuildContext context, state) {
+                        if(state is ProductsFetchedState){
+                          return Expanded(
+                            child: ListView.builder(
+                                itemCount: state.products.length,
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (context, index){
+                                  return ProductWidget(product: state.products[index]);
+                                }),
+                          );
+                        }
+                        return Container();
+                      },
                     )
                   ],
                 ),
